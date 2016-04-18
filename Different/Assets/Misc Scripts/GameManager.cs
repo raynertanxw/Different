@@ -20,7 +20,12 @@ public class GameManager : MonoBehaviour
 		for (int i = 0; i < 10; i++)
 		{
 			PlebController.Spawn((Vector3) Random.insideUnitCircle);
-		}
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            ObstacleController.Spawn((Vector3)Random.insideUnitCircle + Vector3.right * 5);
+        }
 	}
 
 	private void OnDestroy()
