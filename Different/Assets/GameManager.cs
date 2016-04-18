@@ -16,9 +16,7 @@ public class GameManager : MonoBehaviour
 		{
 			Destroy(this.gameObject);
 		}
-
-
-
+			
 		for (int i = 0; i < 30; i++)
 		{
 			PlebController.Spawn((Vector3) Random.insideUnitCircle);
@@ -31,5 +29,10 @@ public class GameManager : MonoBehaviour
 		{
 			sInstance = null;
 		}
+	}
+
+	private void Update()
+	{
+		
 	}
 }

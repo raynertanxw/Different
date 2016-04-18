@@ -6,7 +6,9 @@ public class PlebController : MonoBehaviour
 {
 	private static List<PlebController> PlebControllers = null;
 	private static float ForceMultiplier = 50.0f;
-	private static int NumPlebs { get { return PlebControllers.Count; } }
+	private static int mnNumAlivePlebs;
+	public static int NumPlebs { get { return PlebControllers.Count; } }
+	public static int NumAlivePlebs { get { return mnNumAlivePlebs; } }
 
 	private Rigidbody2D thisRB;
 	private Collider2D thisCol2D;
@@ -24,6 +26,7 @@ public class PlebController : MonoBehaviour
 		if (PlebControllers == null)
 		{
 			PlebControllers = new List<PlebController>();
+			mnNumAlivePlebs = 0;
 		}
 
 		PlebControllers.Add(this);
@@ -48,6 +51,7 @@ public class PlebController : MonoBehaviour
 				PlebController spawningPleb = PlebControllers[i];
 				spawningPleb.transform.position = _spawnPos;
 				spawningPleb.SetEnabled(true);
+				mnNumAlivePlebs++;
 
 				return spawningPleb;
 			}
@@ -61,6 +65,7 @@ public class PlebController : MonoBehaviour
 	public void ReturnToPool()
 	{
 		SetEnabled(false);
+		mnNumAlivePlebs--;
 	}
 
 	private void SetEnabled(bool _enabled)
