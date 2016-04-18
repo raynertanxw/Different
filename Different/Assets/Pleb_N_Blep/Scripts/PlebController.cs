@@ -20,6 +20,7 @@ public class PlebController : MonoBehaviour
 		thisRB = gameObject.GetComponent<Rigidbody2D>();
 		thisCol2D = gameObject.GetComponent<Collider2D>();
 		thisSpriteRen = gameObject.GetComponent<SpriteRenderer>();
+//		SetRandColor();
 
 		SetEnabled(false);
 
@@ -123,5 +124,16 @@ public class PlebController : MonoBehaviour
 			proximityForceMultiplier = 10.0f;
 		distVec *= proximityForceMultiplier;
 		return distVec * ForceMultiplier;
+	}
+
+	private void SetRandColor()
+	{
+		Color newCol = new Color(Random.Range(0.0f, 0.3f), Random.Range(0.0f, 0.3f), Random.Range(0.0f, 0.3f), 1.0f);
+		while (newCol.r + newCol.g + newCol.b < 0.3f)
+		{
+			newCol = new Color(Random.Range(0.0f, 0.3f), Random.Range(0.0f, 0.3f), Random.Range(0.0f, 0.3f), 1.0f);
+		}
+
+		thisSpriteRen.color = newCol;
 	}
 }
