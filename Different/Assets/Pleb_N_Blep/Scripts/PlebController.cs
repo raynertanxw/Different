@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using DaburuTools.Action;
+using DaburuTools;
 
 public class PlebController : MonoBehaviour
 {
@@ -53,6 +55,13 @@ public class PlebController : MonoBehaviour
 				spawningPleb.transform.position = _spawnPos;
 				spawningPleb.SetEnabled(true);
 				mnNumAlivePlebs++;
+
+				// Pulse Animation
+				PulseAction pulseAct = new PulseAction(spawningPleb.transform, 1,
+					Graph.Exponential, Graph.InverseExponential,
+					0.1f, 0.5f,
+					Vector3.one, new Vector3(2.0f, 2.0f, 2.0f));
+				ActionHandler.RunAction(pulseAct);
 
 				return spawningPleb;
 			}
