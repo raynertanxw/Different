@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 			Destroy(this.gameObject);
 		}
 			
-		for (int i = 0; i < 30; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			PlebController.Spawn((Vector3) Random.insideUnitCircle);
 		}
