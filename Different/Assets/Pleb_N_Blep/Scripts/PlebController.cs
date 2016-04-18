@@ -35,6 +35,14 @@ public class PlebController : MonoBehaviour
 		PlebControllers.Add(this);
 	}
 
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == Constants.kTagObstacle)
+        {
+            ReturnToPool();
+        }
+    }
+
 	private void OnDestroy()
 	{
 		PlebControllers.Remove(this);
