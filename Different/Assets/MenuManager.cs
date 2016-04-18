@@ -28,6 +28,16 @@ public class MenuManager : MonoBehaviour
         Slide(Vector2.down);
     }
 
+    public void SlideLeft()
+    {
+        Slide(Vector2.left);
+    }
+
+    public void SlideRight()
+    {
+        Slide(Vector2.right);
+    }
+
     private void Slide(Vector2 _direction)
     {
         _direction = new Vector2(Mathf.Round(Mathf.Clamp(_direction.x, -1, 1)), Mathf.Round(Mathf.Clamp(_direction.y, -1, 1)));
