@@ -14,13 +14,13 @@ public class PlebController : MonoBehaviour
 
 	private void Update()
 	{
-		// Left click
+		// Left click Attracts
 		if (Input.GetMouseButton(0))
 		{
 			Attract();
 		}
 
-		// Right click
+		// Right click Repels
 		else if (Input.GetMouseButton(1))
 		{
 			Repel();
