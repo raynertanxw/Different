@@ -56,6 +56,11 @@ public class AudioManager : MonoBehaviour
 		mSoundEffects[1].Play();
 	}
 
+	public void PlayReproductionSound()
+	{
+		mSoundEffects[2].Play();
+	}
+
 	public void StartBGM(GameDifficulty _difficulty)
 	{
 		int track = (int) _difficulty;
