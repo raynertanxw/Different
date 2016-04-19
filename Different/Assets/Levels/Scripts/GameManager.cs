@@ -128,17 +128,7 @@ public class GameManager : MonoBehaviour
 		if (!mbGameIsOver)
 		{
 			mfTimeSurvived += Time.deltaTime;
-			timerText.text = FormatTime();
+			timerText.text = Utility.FormatTime(mfTimeSurvived);
 		}
-	}
-
-	private string FormatTime()
-	{
-		int ms = (int) ((mfTimeSurvived * 1000.0f) % 1000.0f);
-		int s = (int) (mfTimeSurvived % 60.0f);
-		int min = (int) (mfTimeSurvived / 60.0f);
-
-		string survivalTime = min.ToString("00") + ":" + s.ToString("00") + ":" + ms.ToString("000");
-		return survivalTime;
 	}
 }
