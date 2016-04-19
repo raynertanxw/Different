@@ -35,6 +35,12 @@ public class BelpController : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D col)
 	{
+		if (col.gameObject.tag == Constants.kTagObstacle)
+		{
+			GameManager.Instance.GameOver();
+			Destroy(this.gameObject);
+		}
+
 		if (mfCooldownTimer > 0.0f)
 			return;
 
