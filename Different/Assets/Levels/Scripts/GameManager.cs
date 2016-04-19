@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
 		}
 
 		SetUp();
+		AudioManager.Instance.StartBGM(sDifficulty);
 	}
 
 	private void SetUp()

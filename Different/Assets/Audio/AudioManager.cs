@@ -66,8 +66,9 @@ public class AudioManager : MonoBehaviour
 	{
 		int track = (int) _difficulty;
 
-		if (mBGM[track].isPlaying)
-			return;
+		if (mBGM[track].volume == BGMVolume)
+			if (mBGM[track].isPlaying)
+				return;
 
 		mBGM[track].volume = BGMVolume;
 		mBGM[track].Play();
