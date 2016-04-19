@@ -6,7 +6,10 @@ using DaburuTools.Action;
 
 public abstract class ObstacleController : MonoBehaviour
 {
-    protected static List<ObstacleController> obstacleControllers = null;
+    protected static List<List<ObstacleController>> obstacleControllers = null;
+    protected static List<ObstacleController> spikeWallControllers = null;
+    protected static List<ObstacleController> spearControllers = null;
+    protected static List<ObstacleController> swordControllers = null;
     protected static int mnNumAliveObstacles;
     public static int NumObstacles { get { return obstacleControllers.Count; } }
     public static int NumAliveObstacles { get { return mnNumAliveObstacles; } }
@@ -15,7 +18,7 @@ public abstract class ObstacleController : MonoBehaviour
     protected SpriteRenderer thisSpriteRen;
     protected bool mbEnabled;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         thisCol2D = gameObject.GetComponent<Collider2D>();
         thisSpriteRen = gameObject.GetComponent<SpriteRenderer>();
@@ -24,16 +27,28 @@ public abstract class ObstacleController : MonoBehaviour
 
         if (obstacleControllers == null)
         {
-            obstacleControllers = new List<ObstacleController>();
+            obstacleControllers = new List<List<ObstacleController>>();
+            for (int i = 0; i < 3; i++)
+            {
+                obstacleControllers.Add(new List<ObstacleController>());
+            }
             mnNumAliveObstacles = 0;
         }
+        else if (obstacleControllers.Count < 3)
+        {
+            for (int i = 0; i < 3 - obstacleControllers.Count; i++)
+            {
+                obstacleControllers.Add(new List<ObstacleController>());
+            }
+        }
 
-        obstacleControllers.Add(this);
+        spikeWallControllers = obstacleControllers[0];
+        spearControllers = obstacleControllers[1];
+        swordControllers = obstacleControllers[2];
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
-        obstacleControllers.Remove(this);
         if (obstacleControllers.Count == 0)
         {
             obstacleControllers = null;
@@ -41,13 +56,13 @@ public abstract class ObstacleController : MonoBehaviour
     }
 
     #region Pool Spawn Controls
-    public static ObstacleController Spawn(Vector3 _spawnPos)
+    protected static ObstacleController SpawnBase(List<ObstacleController> _controllers, Vector3 _spawnPos)
     {
-        for (int i = 0; i < obstacleControllers.Count; i++)
+        for (int i = 0; i < _controllers.Count; i++)
         {
-            if (obstacleControllers[i].mbEnabled == false)
+            if (_controllers[i].mbEnabled == false)
             {
-                ObstacleController spawningObstacle = obstacleControllers[i];
+                ObstacleController spawningObstacle = _controllers[i];
                 spawningObstacle.transform.position = _spawnPos;
                 spawningObstacle.SetEnabled(true);
                 mnNumAliveObstacles++;
@@ -56,7 +71,9 @@ public abstract class ObstacleController : MonoBehaviour
                 spawningObstacle.transform.localEulerAngles = new Vector3(0, 0, Random.Range(0, 360));
 
                 //Scale Animation
-                GraphScaleToAction scaleAct = new GraphScaleToAction(spawningObstacle.transform, Graph.InverseExponential, new Vector3(4, 4, 4), 0.5f);
+                Vector3 scale = spawningObstacle.transform.localScale;
+                spawningObstacle.transform.localScale = Vector3.zero;
+                GraphScaleToAction scaleAct = new GraphScaleToAction(spawningObstacle.transform, Graph.InverseExponential, scale, 0.5f);
                 ActionHandler.RunAction(scaleAct);
 
                 spawningObstacle.OnSpawn();

@@ -67,7 +67,17 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < 5; i++)
         {
-            ObstacleController.Spawn((Vector3)Random.insideUnitCircle + Vector3.right * 5);
+            SpikeWallController.Spawn((Vector3)Random.insideUnitCircle + Vector3.right * 5);
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            SpearController.Spawn((Vector3)Random.insideUnitCircle + Vector3.right * 5);
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            SwordController.Spawn((Vector3)Random.insideUnitCircle + Vector3.right * 5);
         }
 	}
 

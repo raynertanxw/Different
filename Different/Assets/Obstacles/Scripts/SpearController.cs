@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpikeWallController : ObstacleController
+public class SpearController : ObstacleController
 {
     private float rot;
     public float speed = 1;
@@ -10,19 +10,19 @@ public class SpikeWallController : ObstacleController
     {
         base.Awake();
 
-        spikeWallControllers.Add(this);
+        spearControllers.Add(this);
     }
 
     protected override void OnDestroy()
     {
         base.OnDestroy();
 
-        spikeWallControllers.Remove(this);
+        spearControllers.Remove(this);
     }
 
     public static ObstacleController Spawn(Vector3 _spawnPos)
     {
-        return SpawnBase(spikeWallControllers, _spawnPos);
+        return SpawnBase(spearControllers, _spawnPos);
     }
 
     protected override void OnSpawn()

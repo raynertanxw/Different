@@ -1,28 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpikeWallController : ObstacleController
+public class SwordController : ObstacleController
 {
     private float rot;
     public float speed = 1;
+    public float rotSpeed = 15;
 
     protected override void Awake()
     {
         base.Awake();
 
-        spikeWallControllers.Add(this);
+        swordControllers.Add(this);
     }
 
     protected override void OnDestroy()
     {
         base.OnDestroy();
 
-        spikeWallControllers.Remove(this);
+        swordControllers.Remove(this);
     }
 
     public static ObstacleController Spawn(Vector3 _spawnPos)
     {
-        return SpawnBase(spikeWallControllers, _spawnPos);
+        return SpawnBase(swordControllers, _spawnPos);
     }
 
     protected override void OnSpawn()
@@ -33,6 +34,7 @@ public class SpikeWallController : ObstacleController
     private void FixedUpdate()
     {
         transform.localPosition += speed / 100 * (Vector3)DegreeToVector2(rot);
+        transform.Rotate(new Vector3(0, 0, 1), rotSpeed);
     }
 
     private static Vector2 RadianToVector2(float radian)
