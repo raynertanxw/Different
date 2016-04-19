@@ -62,6 +62,11 @@ public class AudioManager : MonoBehaviour
 		mSoundEffects[2].Play();
 	}
 
+	public void PlayGameOverSound()
+	{
+		mSoundEffects[3].Play();
+	}
+
 	public void StartBGM(GameDifficulty _difficulty)
 	{
 		int track = (int) _difficulty;
