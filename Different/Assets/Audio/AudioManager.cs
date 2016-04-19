@@ -46,9 +46,14 @@ public class AudioManager : MonoBehaviour
 		}
 	}
 
-	public void PlayDeathSound()
+	public void PlayClickSound()
 	{
 		mSoundEffects[0].Play();
+	}
+
+	public void PlayDeathSound()
+	{
+		mSoundEffects[1].Play();
 	}
 
 	public void StartBGM(GameDifficulty _difficulty)
