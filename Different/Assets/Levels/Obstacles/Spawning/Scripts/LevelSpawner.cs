@@ -9,6 +9,7 @@ public class LevelSpawner : MonoBehaviour
     private float timeElapsed = 0;
     public float spawnDelay;
     public float spawnDelayFactor;
+    public float speedFactor;
 
     public void Start() { running = true; }
     public void Stop() { running = false; }
@@ -48,7 +49,6 @@ public class LevelSpawner : MonoBehaviour
                 }
                 spawn.transform.position = pos;
                 spawn.GetComponent<AlertController>().obstacleType = (AlertController.ObstacleType)Mathf.FloorToInt(Random.Range(0, 3));
-                spawn.GetComponent<AlertController>().speedFactor = 1 + (float)diff * 0.25f;
 
                 timeElapsed = spawnDelay + (float)diff * spawnDelayFactor;
             }
