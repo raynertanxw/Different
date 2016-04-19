@@ -20,18 +20,14 @@ public class SpikeWallController : ObstacleController
         spikeWallControllers.Remove(this);
     }
 
-    public static ObstacleController Spawn(Vector3 _spawnPos, float _spawnDir, float _speedFactor = -1)
+    public static ObstacleController Spawn(Vector3 _spawnPos, float _spawnDir)
     {
-        return SpawnBase(spikeWallControllers, _spawnPos, _spawnDir, _speedFactor);
+        return SpawnBase(spikeWallControllers, _spawnPos, _spawnDir);
     }
 
-    protected override void OnSpawn(float _speedFactor)
+    protected override void OnSpawn()
     {
         rot = transform.localEulerAngles.z + 90;
-        if (_speedFactor != -1)
-        {
-            speed *= _speedFactor;
-        }
     }
 
     private void FixedUpdate()

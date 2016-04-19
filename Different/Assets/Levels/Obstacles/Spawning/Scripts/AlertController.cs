@@ -8,7 +8,6 @@ public class AlertController : MonoBehaviour
 
     public ObstacleType obstacleType = ObstacleType.Spear;
     public float direction = 0;
-    public float speedFactor = 1;
     public float maxTime = 1;
     private float time;
     private Image timer;
@@ -41,13 +40,13 @@ public class AlertController : MonoBehaviour
         switch (obstacleType)
         {
             case ObstacleType.SpikeWall:
-                SpikeWallController.Spawn(transform.position, direction, speedFactor);
+                SpikeWallController.Spawn(transform.position, direction);
                 break;
             case ObstacleType.Spear:
-                SpearController.Spawn(transform.position, direction, speedFactor);
+                SpearController.Spawn(transform.position, direction);
                 break;
             case ObstacleType.Sword:
-                SwordController.Spawn(transform.position, direction, speedFactor);
+                SwordController.Spawn(transform.position, direction);
                 break;
         }
 

@@ -64,7 +64,7 @@ public abstract class ObstacleController : MonoBehaviour
     }
 
     #region Pool Spawn Controls
-    protected static ObstacleController SpawnBase(List<ObstacleController> _controllers, Vector3 _spawnPos, float _spawnDir, float _speedFactor = -1)
+    protected static ObstacleController SpawnBase(List<ObstacleController> _controllers, Vector3 _spawnPos, float _spawnDir)
     {
         for (int i = 0; i < _controllers.Count; i++)
         {
@@ -82,7 +82,7 @@ public abstract class ObstacleController : MonoBehaviour
                 GraphScaleToAction scaleAct = new GraphScaleToAction(spawningObstacle.transform, Graph.InverseExponential, scale, 0.5f);
                 ActionHandler.RunAction(scaleAct);
 
-                spawningObstacle.OnSpawn(_speedFactor);
+                spawningObstacle.OnSpawn();
 
                 return spawningObstacle;
             }
@@ -93,7 +93,7 @@ public abstract class ObstacleController : MonoBehaviour
         return null;
     }
 
-    protected abstract void OnSpawn(float _speedFactor);
+    protected abstract void OnSpawn();
 
     public void ReturnToPool()
     {
