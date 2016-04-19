@@ -56,7 +56,7 @@ public abstract class ObstacleController : MonoBehaviour
     }
 
     #region Pool Spawn Controls
-    protected static ObstacleController SpawnBase(List<ObstacleController> _controllers, Vector3 _spawnPos)
+    protected static ObstacleController SpawnBase(List<ObstacleController> _controllers, Vector3 _spawnPos, float _spawnDir)
     {
         for (int i = 0; i < _controllers.Count; i++)
         {
@@ -64,11 +64,9 @@ public abstract class ObstacleController : MonoBehaviour
             {
                 ObstacleController spawningObstacle = _controllers[i];
                 spawningObstacle.transform.position = _spawnPos;
+                spawningObstacle.transform.localEulerAngles = new Vector3(0, 0, _spawnDir);
                 spawningObstacle.SetEnabled(true);
                 mnNumAliveObstacles++;
-
-                //TEMPORARY RANDOM DIRECTION
-                spawningObstacle.transform.localEulerAngles = new Vector3(0, 0, Random.Range(0, 360));
 
                 //Scale Animation
                 Vector3 scale = spawningObstacle.transform.localScale;

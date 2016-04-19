@@ -21,9 +21,9 @@ public class SwordController : ObstacleController
         swordControllers.Remove(this);
     }
 
-    public static ObstacleController Spawn(Vector3 _spawnPos)
+    public static ObstacleController Spawn(Vector3 _spawnPos, float _spawnDir)
     {
-        return SpawnBase(swordControllers, _spawnPos);
+        return SpawnBase(swordControllers, _spawnPos, _spawnDir);
     }
 
     protected override void OnSpawn()

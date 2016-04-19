@@ -20,9 +20,9 @@ public class SpikeWallController : ObstacleController
         spikeWallControllers.Remove(this);
     }
 
-    public static ObstacleController Spawn(Vector3 _spawnPos)
+    public static ObstacleController Spawn(Vector3 _spawnPos, float _spawnDir)
     {
-        return SpawnBase(spikeWallControllers, _spawnPos);
+        return SpawnBase(spikeWallControllers, _spawnPos, _spawnDir);
     }
 
     protected override void OnSpawn()

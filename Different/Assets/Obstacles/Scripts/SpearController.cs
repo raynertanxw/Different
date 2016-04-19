@@ -20,9 +20,9 @@ public class SpearController : ObstacleController
         spearControllers.Remove(this);
     }
 
-    public static ObstacleController Spawn(Vector3 _spawnPos)
+    public static ObstacleController Spawn(Vector3 _spawnPos, float _spawnDir)
     {
-        return SpawnBase(spearControllers, _spawnPos);
+        return SpawnBase(spearControllers, _spawnPos, _spawnDir);
     }
 
     protected override void OnSpawn()
