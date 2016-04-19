@@ -38,6 +38,7 @@ public class BelpController : MonoBehaviour
 		if (col.gameObject.tag == Constants.kTagObstacle)
 		{
 			GameManager.Instance.GameOver();
+			AudioManager.Instance.PlayDeathSound();
 			Destroy(this.gameObject);
 		}
 

@@ -71,6 +71,7 @@ public class PlebController : MonoBehaviour
 					0.1f, 0.5f,
 					Vector3.one, new Vector3(2.0f, 2.0f, 2.0f));
 				ActionHandler.RunAction(pulseAct);
+				AudioManager.Instance.PlayReproductionSound();
 
 				return spawningPleb;
 			}
@@ -85,6 +86,7 @@ public class PlebController : MonoBehaviour
 	{
 		SetEnabled(false);
 		mnNumAlivePlebs--;
+		AudioManager.Instance.PlayDeathSound();
 	}
 
 	private void SetEnabled(bool _enabled)
