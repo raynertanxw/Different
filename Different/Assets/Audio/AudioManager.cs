@@ -72,19 +72,34 @@ public class AudioManager : MonoBehaviour
 		mBGM[track].Play();
 
 		// Stop playing all other BGMs
-		for (int i = 0; i < mBGM.Length; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			if (i != track)
 				mBGM[i].Stop();
 		}
 	}
 
+	public void StartMenuMusic()
+	{
+		if (mBGM[4].isPlaying)
+			return;
+
+		mBGM[4].volume = BGMVolume;
+		mBGM[4].Play();
+	}
+
 	public void FadeOutBGM()
 	{
-		for (int i = 0; i < mBGM.Length; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			VolumeFadeAction volumeFade = new VolumeFadeAction(mBGM[i], Graph.Linear, 0.0f, 0.5f);
 			ActionHandler.RunAction(volumeFade);
 		}
+	}
+
+	public void FadeOutMenuMusic()
+	{
+		VolumeFadeAction volumeFade = new VolumeFadeAction(mBGM[4], Graph.Linear, 0.0f, 0.5f);
+		ActionHandler.RunAction(volumeFade);
 	}
 }
