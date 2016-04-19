@@ -59,6 +59,9 @@ public class GameManager : MonoBehaviour
 			break;
 		}
 
+		// Set BGM
+		AudioManager.Instance.StartBGM(sDifficulty);
+
 		// Spawn starting number of Plebs.
 		for (int i = 0; i < 10; i++)
 		{

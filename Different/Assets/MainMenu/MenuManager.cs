@@ -8,6 +8,11 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject[] canvases;
 
+	private void Awake()
+	{
+		AudioManager.Instance.FadeOutBGM();
+	}
+
     public void LoadLevel(int _diff)
     {
         GameManager.SetGameDifficulty((GameDifficulty)_diff);
