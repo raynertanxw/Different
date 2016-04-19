@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
 	public static AudioManager Instance { get { return sInstance; } }
 
 	public float BGMVolume = 1.0f;
+	public float MainMenuVolume = 0.7f;
 
 	private AudioSource[] mSoundEffects;
 	private AudioSource[] mBGM;
@@ -81,11 +82,12 @@ public class AudioManager : MonoBehaviour
 
 	public void StartMenuMusic()
 	{
-		if (mBGM[4].isPlaying)
-			return;
+		mBGM[3].volume = 0.0f;
 
-		mBGM[4].volume = BGMVolume;
-		mBGM[4].Play();
+		VolumeFadeAction volumeFade = new VolumeFadeAction(mBGM[3], Graph.Linear, MainMenuVolume, 0.5f);
+		ActionHandler.RunAction(volumeFade);
+
+		mBGM[3].Play();
 	}
 
 	public void FadeOutBGM()
@@ -99,7 +101,7 @@ public class AudioManager : MonoBehaviour
 
 	public void FadeOutMenuMusic()
 	{
-		VolumeFadeAction volumeFade = new VolumeFadeAction(mBGM[4], Graph.Linear, 0.0f, 0.5f);
+		VolumeFadeAction volumeFade = new VolumeFadeAction(mBGM[3], Graph.Linear, 0.0f, 0.5f);
 		ActionHandler.RunAction(volumeFade);
 	}
 }

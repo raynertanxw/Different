@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
 		}
 
 		// Set BGM
+		AudioManager.Instance.FadeOutMenuMusic();
 		AudioManager.Instance.StartBGM(sDifficulty);
 
 		// Spawn starting number of Plebs.
