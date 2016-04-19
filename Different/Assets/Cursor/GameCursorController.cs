@@ -7,21 +7,20 @@ public class GameCursorController : MonoBehaviour
 
 	private CursorState currentCursorState;
 
-	public Texture2D normalCur;
+	public Texture2D normalCurTex, attractCurTex, idleCurTex, repelCurTex;
+	private Vector2 normalCurVec, mfmCurVec;
+	private CursorMode autoCursorMode = CursorMode.Auto;
 
 	private void Awake()
 	{
-		Cursor.SetCursor(normalCur, Vector2.zero, CursorMode.Auto);
+		normalCurVec = Vector2.zero;
+		mfmCurVec = new Vector2(16.0f, 16.0f);
 
 		ChangeCursorState(CursorState.Idle);
 	}
 
 	private void Update()
 	{
-		Vector3 newCursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		newCursorPos.z = 10.0f;
-		transform.position = newCursorPos;
-
 		if (GameManager.Instance.GameIsOver)
 		{
 			ChangeCursorState(CursorState.Normal);
@@ -53,12 +52,16 @@ public class GameCursorController : MonoBehaviour
 		switch (_curState)
 		{
 		case CursorState.Normal:
+			Cursor.SetCursor(normalCurTex, normalCurVec, autoCursorMode);
 			break;
 		case CursorState.Attract:
+			Cursor.SetCursor(attractCurTex, mfmCurVec, autoCursorMode);
 			break;
 		case CursorState.Idle:
+			Cursor.SetCursor(idleCurTex, mfmCurVec, autoCursorMode);
 			break;
 		case CursorState.Repel:
+			Cursor.SetCursor(repelCurTex, mfmCurVec, autoCursorMode);
 			break;
 		}
 
