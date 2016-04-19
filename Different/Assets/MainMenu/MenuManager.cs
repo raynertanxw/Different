@@ -52,4 +52,9 @@ public class MenuManager : MonoBehaviour
             ActionHandler.RunAction(localMove);
         }
     }
+
+	public void ExitGame()
+	{
+		Application.Quit();
+	}
 }
