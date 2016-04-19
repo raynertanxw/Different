@@ -7,4 +7,9 @@ public class Constants : MonoBehaviour
 	public const string kTagPleb = "Pleb";
     public const string kTagBlep = "Blep";
     public const string kTagObstacle = "Danger";
+
+	// PlayerPref key strings
+	public const string kEasyHighscoreKey = "EasyHighscore";
+	public const string kMediumHighscoreKey = "MediumHighscore";
+	public const string kHardHighscoreKey = "HardHighscore";
 }

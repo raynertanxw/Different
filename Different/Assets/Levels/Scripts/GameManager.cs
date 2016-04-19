@@ -11,6 +11,18 @@ public class GameManager : MonoBehaviour
 	public static void SetGameDifficulty(GameDifficulty _difficulty)
 	{
 		sDifficulty = _difficulty;
+		switch (_difficulty)
+		{
+		case GameDifficulty.Easy:
+			mstrHighscoreKey = Constants.kEasyHighscoreKey;
+			break;
+		case GameDifficulty.Medium:
+			mstrHighscoreKey = Constants.kMediumHighscoreKey;
+			break;
+		case GameDifficulty.Hard:
+			mstrHighscoreKey = Constants.kHardHighscoreKey;
+			break;
+		}
 	}
 	public GameObject EasyLevelPrefab, MediumLevelPrefab, HardLevelPrefab;
 
@@ -22,7 +34,8 @@ public class GameManager : MonoBehaviour
 	public bool GameIsOver { get { return mbGameIsOver; } }
 
 	private float mfTimeSurvived = 0.0f;
-	private Text timerText;
+	private Text timerText, highscoreText;
+	private static string mstrHighscoreKey;
 
 	private CanvasGroup endGameCG;
 
@@ -48,9 +61,17 @@ public class GameManager : MonoBehaviour
 		endGameCG = GameObject.Find("EndGamePanel").GetComponent<CanvasGroup>();
 		SetEndGamePanelVisbility(false);
 
+		// Survival time text
 		mfTimeSurvived = 0.0f;
 		timerText = GameObject.Find("TimerText").GetComponent<Text>();
 		timerText.text = "00:00:00";
+
+		// Highscore text
+		highscoreText = GameObject.Find("HighscoreText").GetComponent<Text>();
+		if (PlayerPrefs.HasKey(mstrHighscoreKey))
+			highscoreText.text = "Best - " + Utility.FormatTime(PlayerPrefs.GetFloat(mstrHighscoreKey));
+		else
+			highscoreText.text = "";
 
 		// Spawn the Level Prefab
 		switch (sDifficulty)
@@ -105,7 +126,7 @@ public class GameManager : MonoBehaviour
 	{
 		mbGameIsOver = true;
 
-
+		CheckForHighScore();
 
 		PresentGameOver();
 	}
@@ -129,6 +150,29 @@ public class GameManager : MonoBehaviour
 		{
 			mfTimeSurvived += Time.deltaTime;
 			timerText.text = Utility.FormatTime(mfTimeSurvived);
+		}
+	}
+
+	private void CheckForHighScore()
+	{
+		if (PlayerPrefs.HasKey(mstrHighscoreKey) == false)
+		{
+			PlayerPrefs.SetFloat(mstrHighscoreKey, mfTimeSurvived);
+			highscoreText.text = "New Best Survival Time!";
+			highscoreText.color = Color.green;
+
+			return;
+		}
+		else
+		{
+			float oldHighscore = PlayerPrefs.GetFloat(mstrHighscoreKey);
+
+			if (mfTimeSurvived > oldHighscore)
+			{
+				PlayerPrefs.SetFloat(mstrHighscoreKey, mfTimeSurvived);
+				highscoreText.text = "New Best Survival Time!";
+				highscoreText.color = Color.green;
+			}
 		}
 	}
 }
