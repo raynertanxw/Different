@@ -6,10 +6,11 @@ public enum GameDifficulty { Easy, Medium, Hard };
 
 public class GameManager : MonoBehaviour
 {
-	private static GameDifficulty difficulty;
+	private static GameDifficulty sDifficulty;
+	public static GameDifficulty Difficulty { get { return sDifficulty; } }
 	public static void SetGameDifficulty(GameDifficulty _difficulty)
 	{
-		difficulty = _difficulty;
+		sDifficulty = _difficulty;
 	}
 
 
