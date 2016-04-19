@@ -20,14 +20,18 @@ public class SpearController : ObstacleController
         spearControllers.Remove(this);
     }
 
-    public static ObstacleController Spawn(Vector3 _spawnPos, float _spawnDir)
+    public static ObstacleController Spawn(Vector3 _spawnPos, float _spawnDir, float _speedFactor = -1)
     {
-        return SpawnBase(spearControllers, _spawnPos, _spawnDir);
+        return SpawnBase(spearControllers, _spawnPos, _spawnDir, _speedFactor);
     }
 
-    protected override void OnSpawn()
+    protected override void OnSpawn(float _speedFactor)
     {
         rot = transform.localEulerAngles.z + 90;
+        if (_speedFactor != -1)
+        {
+            speed *= _speedFactor;
+        }
     }
 
     private void FixedUpdate()
