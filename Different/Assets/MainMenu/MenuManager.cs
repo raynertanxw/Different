@@ -8,14 +8,10 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject[] canvases;
 
-    public void ChangeScene(string _scene)
+    public void LoadLevel(int _diff)
     {
-        SceneManager.LoadScene(_scene);
-    }
-
-    public void ChangeScene(int _index)
-    {
-        SceneManager.LoadScene(_index);
+        GameManager.SetGameDifficulty((GameDifficulty)_diff);
+        SceneManager.LoadScene("Main-Scene");
     }
 
     public void SlideUp()
