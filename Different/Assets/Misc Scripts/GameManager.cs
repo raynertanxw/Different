@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
 	private bool mbGameIsOver;
 	public bool GameIsOver { get { return mbGameIsOver; } }
 
+	private float mfTimeSurvived = 0.0f;
+	private Text timerText;
+
 	private CanvasGroup endGameCG;
 
 	private void Awake()
@@ -44,6 +47,10 @@ public class GameManager : MonoBehaviour
 
 		endGameCG = GameObject.Find("EndGamePanel").GetComponent<CanvasGroup>();
 		SetEndGamePanelVisbility(false);
+
+		mfTimeSurvived = 0.0f;
+		timerText = GameObject.Find("TimerText").GetComponent<Text>();
+		timerText.text = "00:00:00";
 
 		// Spawn the Level Prefab
 		switch (sDifficulty)
@@ -118,6 +125,15 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
-		
+		if (!mbGameIsOver)
+		{
+			mfTimeSurvived += Time.deltaTime;
+			timerText.text = FormatTime();
+		}
+	}
+
+	private string FormatTime()
+	{
+		return mfTimeSurvived.ToString();
 	}
 }
