@@ -5,9 +5,10 @@ public class LevelSpawner : MonoBehaviour
 {
     public GameObject alert;
     private bool running = true;
-    private GameDifficulty diff;
+    private int diff;
     private float timeElapsed = 0;
-    public float spawnDelay = 1;
+    public float spawnDelay;
+    public float spawnDelayFactor;
 
     public void Start() { running = true; }
     public void Stop() { running = false; }
@@ -20,14 +21,14 @@ public class LevelSpawner : MonoBehaviour
 
     private void Awake()
     {
-        diff = GameManager.Difficulty;
+        diff = (int)GameManager.Difficulty;
     }
 
     private void FixedUpdate()
     {
         if (running)
         {
-            if (timeElapsed > spawnDelay)
+            if (timeElapsed <= 0)
             {
                 GameObject spawn = Instantiate(alert) as GameObject;
 
@@ -47,11 +48,12 @@ public class LevelSpawner : MonoBehaviour
                 }
                 spawn.transform.position = pos;
                 spawn.GetComponent<AlertController>().obstacleType = (AlertController.ObstacleType)Mathf.FloorToInt(Random.Range(0, 3));
+                spawn.GetComponent<AlertController>().speedFactor = 1 + (float)diff * 0.25f;
 
-                timeElapsed = 0;
+                timeElapsed = spawnDelay + (float)diff * spawnDelayFactor;
             }
 
-            timeElapsed += Time.deltaTime;
+            timeElapsed -= Time.deltaTime;
         }
     }
 }
