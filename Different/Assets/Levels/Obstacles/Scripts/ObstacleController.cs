@@ -47,6 +47,14 @@ public abstract class ObstacleController : MonoBehaviour
         swordControllers = obstacleControllers[2];
     }
 
+    private void Update()
+    {
+        if(Mathf.Abs(transform.position.x) > 10.6f || Mathf.Abs(transform.position.y) > 6.4f)
+        {
+            ReturnToPool();
+        }
+    }
+
     protected virtual void OnDestroy()
     {
         if (obstacleControllers.Count == 0)
