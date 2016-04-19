@@ -134,6 +134,11 @@ public class GameManager : MonoBehaviour
 
 	private string FormatTime()
 	{
-		return mfTimeSurvived.ToString();
+		int ms = (int) ((mfTimeSurvived * 1000.0f) % 1000.0f);
+		int s = (int) (mfTimeSurvived % 60.0f);
+		int min = (int) (mfTimeSurvived / 60.0f);
+
+		string survivalTime = min.ToString("00") + ":" + s.ToString("00") + ":" + ms.ToString("000");
+		return survivalTime;
 	}
 }
