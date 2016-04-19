@@ -5,17 +5,13 @@ public class GameCursorController : MonoBehaviour
 {
 	private enum CursorState { Normal, Attract, Idle, Repel };
 
-	private SpriteRenderer normalCursor, attractCursor, idleCursor, repelCursor;
 	private CursorState currentCursorState;
+
+	public Texture2D normalCur;
 
 	private void Awake()
 	{
-		Cursor.visible = false;
-
-		normalCursor 	= transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
-		attractCursor 	= transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>();
-		idleCursor 		= transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>();
-		repelCursor 	= transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>();
+		Cursor.SetCursor(normalCur, Vector2.zero, CursorMode.Auto);
 
 		ChangeCursorState(CursorState.Idle);
 	}
@@ -57,28 +53,12 @@ public class GameCursorController : MonoBehaviour
 		switch (_curState)
 		{
 		case CursorState.Normal:
-			normalCursor.enabled 	= true;
-			attractCursor.enabled 	= false;
-			idleCursor.enabled 		= false;
-			repelCursor.enabled 	= false;
 			break;
 		case CursorState.Attract:
-			normalCursor.enabled 	= false;
-			attractCursor.enabled 	= true;
-			idleCursor.enabled 		= false;
-			repelCursor.enabled 	= false;
 			break;
 		case CursorState.Idle:
-			normalCursor.enabled 	= false;
-			attractCursor.enabled 	= false;
-			idleCursor.enabled 		= true;
-			repelCursor.enabled 	= false;
 			break;
 		case CursorState.Repel:
-			normalCursor.enabled 	= false;
-			attractCursor.enabled 	= false;
-			idleCursor.enabled 		= false;
-			repelCursor.enabled 	= true;
 			break;
 		}
 

@@ -40,6 +40,20 @@ public class GameManager : MonoBehaviour
         }
 	}
 
+	public void GameOver()
+	{
+		mbGameIsOver = true;
+
+
+
+		PresentGameOver();
+	}
+
+	private void PresentGameOver()
+	{
+
+	}
+
 	private void OnDestroy()
 	{
 		if (sInstance == this)
