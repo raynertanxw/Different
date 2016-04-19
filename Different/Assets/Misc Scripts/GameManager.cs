@@ -2,8 +2,17 @@
 using System.Collections;
 using UnityEngine.UI;
 
+public enum GameDifficulty { Easy, Medium, Hard };
+
 public class GameManager : MonoBehaviour
 {
+	private static GameDifficulty difficulty;
+	public static void SetGameDifficulty(GameDifficulty _difficulty)
+	{
+		difficulty = _difficulty;
+	}
+
+
 	private static GameManager sInstance = null;
 	public static GameManager Instance { get { return sInstance; } }
 
