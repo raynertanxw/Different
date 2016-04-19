@@ -10,7 +10,6 @@ public class MenuManager : MonoBehaviour
 
 	private void Awake()
 	{
-		AudioManager.Instance.FadeOutBGM();
 		AudioManager.Instance.StartMenuMusic();
 	}
 

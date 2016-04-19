@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour
 		CheckForHighScore();
 
 		PresentGameOver();
+		AudioManager.Instance.FadeOutBGM();
 	}
 
 	private void PresentGameOver()
