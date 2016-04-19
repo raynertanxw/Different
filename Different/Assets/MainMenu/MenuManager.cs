@@ -15,6 +15,7 @@ public class MenuManager : MonoBehaviour
 
     public void LoadLevel(int _diff)
     {
+		AudioManager.Instance.PlayClickSound();
         GameManager.SetGameDifficulty((GameDifficulty)_diff);
         SceneManager.LoadScene("Main-Scene");
     }
@@ -41,6 +42,7 @@ public class MenuManager : MonoBehaviour
 
     private void Slide(Vector2 _direction)
     {
+		AudioManager.Instance.PlayClickSound();
         _direction = new Vector2(Mathf.Round(Mathf.Clamp(_direction.x, -1, 1)), Mathf.Round(Mathf.Clamp(_direction.y, -1, 1)));
         float width = 19.2f, height = 10.8f;
         foreach (GameObject canvas in canvases)
