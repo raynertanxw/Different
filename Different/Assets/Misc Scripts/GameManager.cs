@@ -6,12 +6,13 @@ public enum GameDifficulty { Easy, Medium, Hard };
 
 public class GameManager : MonoBehaviour
 {
-	private static GameDifficulty sDifficulty;
+	private static GameDifficulty sDifficulty = GameDifficulty.Easy;
 	public static GameDifficulty Difficulty { get { return sDifficulty; } }
 	public static void SetGameDifficulty(GameDifficulty _difficulty)
 	{
 		sDifficulty = _difficulty;
 	}
+	public GameObject EasyLevelPrefab, MediumLevelPrefab, HardLevelPrefab;
 
 
 	private static GameManager sInstance = null;
@@ -43,6 +44,20 @@ public class GameManager : MonoBehaviour
 
 		endGameCG = GameObject.Find("EndGamePanel").GetComponent<CanvasGroup>();
 		SetEndGamePanelVisbility(false);
+
+		// Spawn the Level Prefab
+		switch (sDifficulty)
+		{
+		case GameDifficulty.Easy:
+			GameObject.Instantiate(EasyLevelPrefab, Vector3.zero, Quaternion.identity);
+			break;
+		case GameDifficulty.Medium:
+			GameObject.Instantiate(MediumLevelPrefab, Vector3.zero, Quaternion.identity);
+			break;
+		case GameDifficulty.Hard:
+			GameObject.Instantiate(HardLevelPrefab, Vector3.zero, Quaternion.identity);
+			break;
+		}
 
 		// Spawn starting number of Plebs.
 		for (int i = 0; i < 10; i++)
