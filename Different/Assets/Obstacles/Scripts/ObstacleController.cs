@@ -4,21 +4,19 @@ using System.Collections.Generic;
 using DaburuTools;
 using DaburuTools.Action;
 
-public class ObstacleController : MonoBehaviour
+public abstract class ObstacleController : MonoBehaviour
 {
-    private static List<ObstacleController> obstacleControllers = null;
-    private static int mnNumAliveObstacles;
+    protected static List<ObstacleController> obstacleControllers = null;
+    protected static int mnNumAliveObstacles;
     public static int NumObstacles { get { return obstacleControllers.Count; } }
     public static int NumAliveObstacles { get { return mnNumAliveObstacles; } }
 
-    private Rigidbody2D thisRB;
-    private Collider2D thisCol2D;
-    private SpriteRenderer thisSpriteRen;
-    private bool mbEnabled;
+    protected Collider2D thisCol2D;
+    protected SpriteRenderer thisSpriteRen;
+    protected bool mbEnabled;
 
     private void Awake()
     {
-        thisRB = gameObject.GetComponent<Rigidbody2D>();
         thisCol2D = gameObject.GetComponent<Collider2D>();
         thisSpriteRen = gameObject.GetComponent<SpriteRenderer>();
 
@@ -54,12 +52,14 @@ public class ObstacleController : MonoBehaviour
                 spawningObstacle.SetEnabled(true);
                 mnNumAliveObstacles++;
 
-                // Pulse Animation
-                PulseAction pulseAct = new PulseAction(spawningObstacle.transform, 1,
-                    Graph.Exponential, Graph.InverseExponential,
-                    0.1f, 0.5f,
-                    new Vector3(4, 4, 4), new Vector3(8, 8, 8));
-                ActionHandler.RunAction(pulseAct);
+                //TEMPORARY RANDOM DIRECTION
+                spawningObstacle.transform.localEulerAngles = new Vector3(0, 0, Random.Range(0, 360));
+
+                //Scale Animation
+                GraphScaleToAction scaleAct = new GraphScaleToAction(spawningObstacle.transform, Graph.InverseExponential, new Vector3(4, 4, 4), 0.5f);
+                ActionHandler.RunAction(scaleAct);
+
+                spawningObstacle.OnSpawn();
 
                 return spawningObstacle;
             }
@@ -69,6 +69,8 @@ public class ObstacleController : MonoBehaviour
         Debug.LogWarning("Not enough Obstacles, EXPAND POOL!!!");
         return null;
     }
+
+    protected abstract void OnSpawn();
 
     public void ReturnToPool()
     {
