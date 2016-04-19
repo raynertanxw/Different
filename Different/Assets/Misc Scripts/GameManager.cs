@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class GameManager : MonoBehaviour
 
 	private bool mbGameIsOver;
 	public bool GameIsOver { get { return mbGameIsOver; } }
+
+	private CanvasGroup endGameCG;
 
 	private void Awake()
 	{
@@ -28,6 +31,9 @@ public class GameManager : MonoBehaviour
 	{
 		mbGameIsOver = false;
 
+		endGameCG = GameObject.Find("EndGamePanel").GetComponent<CanvasGroup>();
+		SetEndGamePanelVisbility(false);
+
 		// Spawn starting number of Plebs.
 		for (int i = 0; i < 10; i++)
 		{
@@ -38,6 +44,30 @@ public class GameManager : MonoBehaviour
         {
             ObstacleController.Spawn((Vector3)Random.insideUnitCircle + Vector3.right * 5);
         }
+	}
+
+	private void SetEndGamePanelVisbility(bool _visible)
+	{
+		if (_visible)
+		{
+			endGameCG.alpha = 1.0f;
+			endGameCG.interactable = true;
+			endGameCG.blocksRaycasts = true;
+		}
+		else
+		{
+			endGameCG.alpha = 0.0f;
+			endGameCG.interactable = false;
+			endGameCG.blocksRaycasts = false;
+		}
+	}
+
+	public void CheckGameOver()
+	{
+		if (PlebController.NumAlivePlebs <= 0)
+		{
+			GameOver();
+		}
 	}
 
 	public void GameOver()
@@ -51,7 +81,7 @@ public class GameManager : MonoBehaviour
 
 	private void PresentGameOver()
 	{
-
+		SetEndGamePanelVisbility(true);
 	}
 
 	private void OnDestroy()

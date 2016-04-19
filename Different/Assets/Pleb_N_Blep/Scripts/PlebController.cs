@@ -40,6 +40,7 @@ public class PlebController : MonoBehaviour
         if (col.gameObject.tag == Constants.kTagObstacle)
         {
             ReturnToPool();
+			GameManager.Instance.CheckGameOver();
         }
     }
 
