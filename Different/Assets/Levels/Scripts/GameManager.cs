@@ -131,6 +131,7 @@ public class GameManager : MonoBehaviour
 
 		PresentGameOver();
 		AudioManager.Instance.FadeOutBGM();
+		AudioManager.Instance.PlayGameOverSound();
 	}
 
 	private void PresentGameOver()
