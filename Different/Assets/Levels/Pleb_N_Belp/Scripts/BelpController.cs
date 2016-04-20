@@ -17,6 +17,9 @@ public class BelpController : MonoBehaviour
 
 	private void Update()
 	{
+		if (GameManager.Instance.GameIsPaused)
+			return;
+
 		// Left click Repels
 		if (Input.GetMouseButton(0))
 		{

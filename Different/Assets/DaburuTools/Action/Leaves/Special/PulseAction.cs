@@ -84,7 +84,7 @@ namespace DaburuTools
 					return;
 				}
 
-				mfElaspedDuration += Time.deltaTime;
+				mfElaspedDuration += Time.unscaledDeltaTime;
 				float mfCycleElasped = mfElaspedDuration - mfCycleDuration * mnCurrentCycle;
 				if (mfCycleElasped < mfExpandDuration) // Expand
 				{

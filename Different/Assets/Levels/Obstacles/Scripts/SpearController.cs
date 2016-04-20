@@ -32,6 +32,9 @@ public class SpearController : ObstacleController
 
     private void FixedUpdate()
     {
+		if (GameManager.Instance.GameIsPaused)
+			return;
+
         transform.localPosition += speed / 100 * (Vector3)DegreeToVector2(rot);
     }
 

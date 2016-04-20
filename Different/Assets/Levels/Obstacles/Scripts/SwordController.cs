@@ -33,6 +33,9 @@ public class SwordController : ObstacleController
 
     private void FixedUpdate()
     {
+		if (GameManager.Instance.GameIsPaused)
+			return;
+
         transform.localPosition += speed / 100 * (Vector3)DegreeToVector2(rot);
         transform.Rotate(new Vector3(0, 0, 1), rotSpeed);
     }

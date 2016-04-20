@@ -113,6 +113,9 @@ public class PlebController : MonoBehaviour
 		if (!mbEnabled)
 			return;
 
+		if (GameManager.Instance.GameIsPaused)
+			return;
+
 		// Left click Attracts
 		if (Input.GetMouseButton(0))
 		{

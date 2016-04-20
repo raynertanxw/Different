@@ -27,6 +27,9 @@ public class LevelSpawner : MonoBehaviour
 
     private void FixedUpdate()
     {
+		if (GameManager.Instance.GameIsPaused)
+			return;
+
         if (running)
         {
             if (timeElapsed <= 0)

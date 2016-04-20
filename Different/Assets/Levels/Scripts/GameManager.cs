@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour
 			pausePanelCG.alpha = 1.0f;
 			pausePanelCG.interactable = true;
 			pausePanelCG.blocksRaycasts = true;
+			Time.timeScale = 0.0f;
 		}
 		else
 		{
@@ -135,6 +136,7 @@ public class GameManager : MonoBehaviour
 			pausePanelCG.interactable = false;
 			pausePanelCG.blocksRaycasts = false;
 			mbGameIsPaused = false;
+			Time.timeScale = 1.0f;
 		}
 	}
 
@@ -177,17 +179,17 @@ public class GameManager : MonoBehaviour
 	{
 		if (!mbGameIsOver)
 		{
-			mfTimeSurvived += Time.deltaTime;
-			timerText.text = Utility.FormatTime(mfTimeSurvived);
+			if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
+			{
+				mbGameIsPaused = !mbGameIsPaused;
+				SetPausePanelVisibility(mbGameIsPaused);
+			}
 
 			if (GameIsPaused)
 				return;
 
-			if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
-			{
-				mbGameIsPaused = true;
-				SetPausePanelVisibility(true);
-			}
+			mfTimeSurvived += Time.deltaTime;
+			timerText.text = Utility.FormatTime(mfTimeSurvived);
 		}
 	}
 

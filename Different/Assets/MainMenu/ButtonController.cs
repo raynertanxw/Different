@@ -23,7 +23,7 @@ public class ButtonController : MonoBehaviour
 		mvecOriginAchorPos = thisRectTransform.anchoredPosition;
 		selectionBoxRectTransform = transform.GetChild(1).gameObject.GetComponent<RectTransform>();
 		mvecOriginSizeDelta = selectionBoxRectTransform.sizeDelta;
-		
+
 		PulseAction pulseAct = new PulseAction(this.transform, 1, Graph.SmoothStep, 1.0f, Vector3.one, 1.1f * Vector3.one);
 		ActionRepeatForever repeatForever = new ActionRepeatForever(pulseAct);
 		ActionHandler.RunAction(repeatForever);

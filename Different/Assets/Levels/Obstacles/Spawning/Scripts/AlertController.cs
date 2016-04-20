@@ -25,6 +25,9 @@ public class AlertController : MonoBehaviour
 
     private void Update()
     {
+		if (GameManager.Instance.GameIsPaused)
+			return;
+
         timer.fillAmount = time / maxTime;
 
         if (time <= 0)
