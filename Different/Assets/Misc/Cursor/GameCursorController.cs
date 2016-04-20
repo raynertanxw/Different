@@ -21,6 +21,12 @@ public class GameCursorController : MonoBehaviour
 
 	private void Update()
 	{
+		if (GameManager.Instance == null)
+		{
+			ChangeCursorState(CursorState.Normal);
+			return;
+		}
+
 		if (GameManager.Instance.GameIsOver)
 		{
 			ChangeCursorState(CursorState.Normal);
