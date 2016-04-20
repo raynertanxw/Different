@@ -160,6 +160,14 @@ public class AudioManager : MonoBehaviour
 		}
 	}
 
+	public void KillBGM()
+	{
+		for (int i =0; i < 3; i++)
+		{
+			mBGM[i].volume = 0.0f;
+		}
+	}
+
 	public void FadeOutMenuMusic()
 	{
 		VolumeFadeAction volumeFade = new VolumeFadeAction(mBGM[3], Graph.Linear, 0.0f, 0.5f);

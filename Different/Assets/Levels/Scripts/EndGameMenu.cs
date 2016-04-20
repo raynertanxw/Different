@@ -13,6 +13,7 @@ public class EndGameMenu : MonoBehaviour
 	public void ExitButton()
 	{
 		AudioManager.Instance.PlayClickSound();
+		AudioManager.Instance.KillBGM();
 		SceneManager.LoadScene("Menu-Scene");
 	}
 }

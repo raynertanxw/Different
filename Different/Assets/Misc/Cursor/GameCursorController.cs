@@ -27,7 +27,7 @@ public class GameCursorController : MonoBehaviour
 			return;
 		}
 
-		if (GameManager.Instance.GameIsOver)
+		if (GameManager.Instance.GameIsOver || GameManager.Instance.GameIsPaused)
 		{
 			ChangeCursorState(CursorState.Normal);
 			return;

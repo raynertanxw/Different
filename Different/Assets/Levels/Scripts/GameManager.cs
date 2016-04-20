@@ -33,11 +33,14 @@ public class GameManager : MonoBehaviour
 	private bool mbGameIsOver;
 	public bool GameIsOver { get { return mbGameIsOver; } }
 
+	private bool mbGameIsPaused;
+	public bool GameIsPaused { get { return mbGameIsPaused; } }
+
 	private float mfTimeSurvived = 0.0f;
 	private Text timerText, highscoreText;
 	private static string mstrHighscoreKey;
 
-	private CanvasGroup endGameCG;
+	private CanvasGroup endGameCG, pausePanelCG;
 
 	private void Awake()
 	{
@@ -61,6 +64,9 @@ public class GameManager : MonoBehaviour
 
 		endGameCG = GameObject.Find("EndGamePanel").GetComponent<CanvasGroup>();
 		SetEndGamePanelVisbility(false);
+
+		pausePanelCG = GameObject.Find("PausePanel").GetComponent<CanvasGroup>();
+		SetPausePanelVisibility(false);
 
 		// Survival time text
 		mfTimeSurvived = 0.0f;
@@ -115,6 +121,23 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	public void SetPausePanelVisibility(bool _visible)
+	{
+		if (_visible)
+		{
+			pausePanelCG.alpha = 1.0f;
+			pausePanelCG.interactable = true;
+			pausePanelCG.blocksRaycasts = true;
+		}
+		else
+		{
+			pausePanelCG.alpha = 0.0f;
+			pausePanelCG.interactable = false;
+			pausePanelCG.blocksRaycasts = false;
+			mbGameIsPaused = false;
+		}
+	}
+
 	public void CheckGameOver()
 	{
 		if (PlebController.NumAlivePlebs <= 0)
@@ -156,6 +179,15 @@ public class GameManager : MonoBehaviour
 		{
 			mfTimeSurvived += Time.deltaTime;
 			timerText.text = Utility.FormatTime(mfTimeSurvived);
+
+			if (GameIsPaused)
+				return;
+
+			if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
+			{
+				mbGameIsPaused = true;
+				SetPausePanelVisibility(true);
+			}
 		}
 	}
 
