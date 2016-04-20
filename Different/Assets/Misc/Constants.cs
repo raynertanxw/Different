@@ -12,4 +12,7 @@ public class Constants : MonoBehaviour
 	public const string kEasyHighscoreKey = "EasyHighscore";
 	public const string kMediumHighscoreKey = "MediumHighscore";
 	public const string kHardHighscoreKey = "HardHighscore";
+
+	public const string kBGMVolumeKey = "BGMVolume";
+	public const string kSFXVolumeKey = "SFXVolume";
 }

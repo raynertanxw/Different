@@ -125,6 +125,9 @@ public class GameManager : MonoBehaviour
 
 	public void GameOver()
 	{
+		if (mbGameIsOver)
+			return;
+
 		mbGameIsOver = true;
 
 		CheckForHighScore();

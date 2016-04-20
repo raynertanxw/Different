@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using DaburuTools;
@@ -11,6 +12,33 @@ public class MenuManager : MonoBehaviour
 	private void Awake()
 	{
 		AudioManager.Instance.StartMenuMusic();
+
+		if (PlayerPrefs.HasKey(Constants.kBGMVolumeKey))
+		{
+			GameObject BGMSlider = GameObject.Find("BGM Slider");
+			if (BGMSlider != null)
+			{
+				BGMSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat(Constants.kBGMVolumeKey);
+			}
+		}
+		if (PlayerPrefs.HasKey(Constants.kSFXVolumeKey))
+		{
+			GameObject SFXSlider = GameObject.Find("SFX Slider");
+			if (SFXSlider != null)
+			{
+				SFXSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat(Constants.kSFXVolumeKey);
+			}
+		}
+	}
+
+	public void ChangeBGMVolume(float _newVolume)
+	{
+		AudioManager.Instance.ChangeBGMVolume(_newVolume);
+	}
+
+	public void ChangeSFXVolume(float _newVolume)
+	{
+		AudioManager.Instance.ChangeSFXVolume(_newVolume);
 	}
 
     public void LoadLevel(int _diff)
