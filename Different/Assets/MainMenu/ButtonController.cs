@@ -9,8 +9,21 @@ public class ButtonController : MonoBehaviour
 	public GameDifficulty difficulty;
 	public bool IsLevelButton = false;
 
+	private RectTransform thisRectTransform;
+	private RectTransform selectionBoxRectTransform;
+	private Vector2 mvecOriginAchorPos;
+	private Vector2 mvecButtonDownOffset = new Vector2(0.0f, -20.0f);
+
+	private Vector2 mvecOriginSizeDelta;
+	private Vector2 mvecButtonDownSizeDelta = new Vector2(440.0f, 160.0f);
+
     private void Awake()
     {
+		thisRectTransform = gameObject.GetComponent<RectTransform>();
+		mvecOriginAchorPos = thisRectTransform.anchoredPosition;
+		selectionBoxRectTransform = transform.GetChild(1).gameObject.GetComponent<RectTransform>();
+		mvecOriginSizeDelta = selectionBoxRectTransform.sizeDelta;
+		
 		PulseAction pulseAct = new PulseAction(this.transform, 1, Graph.SmoothStep, 1.0f, Vector3.one, 1.1f * Vector3.one);
 		ActionRepeatForever repeatForever = new ActionRepeatForever(pulseAct);
 		ActionHandler.RunAction(repeatForever);
@@ -41,4 +54,18 @@ public class ButtonController : MonoBehaviour
     {
         transform.FindChild("SelectionBox").GetComponent<Image>().enabled = display;
     }
+
+	public void SetButtonDown(bool _buttonDown)
+	{
+		if (_buttonDown)
+		{
+			thisRectTransform.anchoredPosition = mvecOriginAchorPos + mvecButtonDownOffset;
+			selectionBoxRectTransform.sizeDelta = mvecButtonDownSizeDelta;
+		}
+		else
+		{
+			thisRectTransform.anchoredPosition = mvecOriginAchorPos;
+			selectionBoxRectTransform.sizeDelta = mvecOriginSizeDelta;
+		}
+	}
 }
